@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Echo statement for changing directory to /project/backend
+echo "Changing directory to /project/backend"
+cd /project/backend
+rm -fr backend
+# Echo statement for cloning the repository
+echo "Cloning the repository..."
+git clone https://github.com/Tarun1433/backend.git
+
+# Echo statement for changing directory to the cloned repository
+echo "Changing directory to the cloned repository"
+cd backend
+
+# Echo statement for executing gradle tasks
+echo "Executing gradle build task..."
+gradle build
+
+# Echo statement for changing directory to the built application
+echo "Changing directory to the built application"
+cd /project/backend/backend/my-webapp/build/libs
+
+# Echo statement for renaming the JAR file
+echo "Renaming the JAR file..."
+mv my-webapp-0.0.1-SNAPSHOT.jar app.jar
+
+#Echo Taking BackUp
+echo "taking backup Current working API"
+backend
+
+# Echo statement for copying the JAR file to the destination directory
+echo "Copying the JAR file to /var/www/backend/"
+cp app.jar /var/www/backend/
+
+echo "Deployment completed successfully!"
