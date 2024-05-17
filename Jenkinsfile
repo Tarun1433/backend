@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     echo "Changing directory to the cloned repository"
-                    dir('/project/backend/backend') {
+                    dir('/project/backend/workspace/Gradle_remote_build') {
                         echo "Executing gradle build task..."
                         sh './gradle build'
                     }
@@ -34,7 +34,7 @@ pipeline {
                 success {
                     script {
                         echo "Changing directory to the built application"
-                        dir('/project/backend/backend/my-webapp/build/libs') {
+                        dir('/project/backend/workspace/Gradle_remote_build/my-webapp/build/libs') {
                             echo "Renaming the JAR file..."
                             sh 'mv my-webapp-0.0.1-SNAPSHOT.jar app.jar'
                             echo "Copying the JAR file to /var/www/backend/"
