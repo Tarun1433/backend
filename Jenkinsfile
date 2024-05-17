@@ -1,10 +1,6 @@
 pipeline {
     agent { label 'test' }
     
-    tools {
-        gradle 'local_gradle'  // Ensure you have a Gradle installation named 'local_gradle' configured in Jenkins
-    }
-    
     parameters {
         string(name: 'staging_server', defaultValue: '13.232.37.20', description: 'Remote Staging Server')
     }
