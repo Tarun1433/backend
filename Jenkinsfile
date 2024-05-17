@@ -26,7 +26,7 @@ pipeline {
                     echo "Changing directory to the cloned repository"
                     dir('/project/backend/backend') {
                         echo "Executing gradle build task..."
-                        sh './gradlew build'
+                        sh './gradle build'
                     }
                 }
             }
