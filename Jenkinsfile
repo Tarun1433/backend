@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir('/opt/backend/workspace/Gradle_remote_build') {
+                dir('/opt/backend') {
                     sh "gradle build"
                 }
             }
