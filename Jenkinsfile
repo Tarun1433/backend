@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     echo "Changing directory to /project/backend"
-                    dir('/project/backend') {
+                    dir('/opt/backend') {
                         echo "Cleaning up the directory"
                         sh 'rm -fr workspace'
                         echo "Cloning the repository..."
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     echo "Changing directory to the cloned repository"
-                    dir('/project/backend/workspace/Gradle_remote_build') {
+                    dir('/opt/backend') {
                         echo "Executing gradle build task..." >> text.txt
                         sh 'gradle build'
                     }
@@ -34,11 +34,11 @@ pipeline {
                 success {
                     script {
                         echo "Changing directory to the built application"
-                        dir('/project/backend/workspace/Gradle_remote_build/my-webapp/build/libs') {
+                        dir('/opt/backend/workspace/Gradle_remote_build/my-webapp/build/libs') {
                             echo "Renaming the JAR file..."
                             sh 'mv my-webapp-0.0.1-SNAPSHOT.jar app.jar'
-                            echo "Copying the JAR file to /var/www/backend/"
-                            sh 'cp app.jar /var/www/backend/'
+                            echo "Copying the JAR file to /var"
+                            sh 'cp app.jar /var'
                         }
                     }
                 }
