@@ -5,8 +5,13 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    dir('/opt/backend') {
-                        checkout scm
+                    // Clean up the backend directory if it exists
+                    if (fileExists('backend')) {
+                        deleteDir()
+                    }
+                    // Clone the repository into a directory within the workspace
+                    dir('backend') {
+                        git url: 'https://github.com/Tarun1433/backend.git', branch: 'main'
                     }
                 }
             }
@@ -15,7 +20,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    dir('/opt/backend') {
+                    // Change to the backend directory and run the build
+                    dir('backend') {
                         sh 'gradle build'
                     }
                 }
