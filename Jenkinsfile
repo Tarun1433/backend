@@ -10,18 +10,6 @@ pipeline {
                 }
             }
         }
-        stage('Clear Workspace') {
-            steps {
-                sh "rm -rf /opt/backend/*"
-            }
-        }
-        stage('Clone Repository') {
-            steps {
-                dir('/opt/backend') {
-                    sh "git clone https://github.com/Tarun1433/backend.git"
-                }
-            }
-        }
         stage('Build') {
             steps {
                 dir('/opt/backend') {
