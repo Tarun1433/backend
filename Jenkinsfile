@@ -20,9 +20,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Change to the backend directory and run the build
                     dir('backend') {
-                        sh 'gradle build'
+                        // Check if gradlew exists and make it executable
+                        if (fileExists('gradlew')) {
+                            sh 'chmod +x gradlew'
+                            sh './gradlew build'
+                        } else {
+                            sh 'gradle build'
+                        }
                     }
                 }
             }
