@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('Prepare Environment') {
+        stage('Prepare Environmet') {
             steps {
                 script {
                     echo "Changing directory to /project/backend"
