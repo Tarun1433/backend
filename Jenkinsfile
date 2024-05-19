@@ -1,29 +1,31 @@
 pipeline {
-    agent { label 'test' }
+    agent any
 
     stages {
-        stage('Setup') {
+        stage('Checkout') {
             steps {
                 script {
-                    // Switch to root user
-                    sh "sudo su"
+                    dir('/opt/backend') {
+                        checkout scm
+                    }
                 }
             }
         }
+
         stage('Build') {
             steps {
-                dir('/opt/backend/workspace/Gradle_remote_build') {
-                    sh "gradle build"
+                script {
+                    dir('/opt/backend') {
+                        sh 'gradle build'
+                    }
                 }
             }
         }
-        stage('Deployment') {
-            steps {
-                dir('/opt/backend/workspace/Gradle_remote_build/my-webapp/build/libs') {
-                    sh "mv my-webapp-0.0.1-SNAPSHOT.jar app.jar"
-                    sh "cp app.jar /var"
-                }
-            }
+    }
+
+    post {
+        always {
+            echo 'Build finished!'
         }
     }
 }
