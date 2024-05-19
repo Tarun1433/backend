@@ -12,7 +12,7 @@ pipeline {
                     echo "Changing directory to /project/backend"
                     dir('/project/backend') {
                         echo "Cleaning up the directory"
-                        sh 'rm -fr backend'
+                        sh 'rm -fr workspace'
                         echo "Cloning the repository..."
                         sh 'git clone https://github.com/Tarun1433/backend.git'
                     }
