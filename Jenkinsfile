@@ -21,13 +21,22 @@ pipeline {
             steps {
                 script {
                     dir('backend') {
-                        // Check if gradlew exists and make it executable
-                        if (fileExists('gradlew')) {
-                            sh 'chmod +x gradlew'
-                            sh './gradlew build'
-                        } else {
-                            sh 'gradle build'
-                        }
+                        // Ensure gradlew is executable and run the build
+                        sh 'chmod +x gradlew'
+                        sh './gradlew build'
+                    }
+                }
+            }
+        }
+
+        stage('Rename and Deploy') {
+            steps {
+                script {
+                    dir('backend/my-webapp/build/libs') {
+                        // Rename the jar file
+                        sh 'mv my-webapp-0.0.1-SNAPSHOT.jar app.jar'
+                        // Move the jar file to /var directory
+                        sh 'mv app.jar /var/'
                     }
                 }
             }
